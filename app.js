@@ -22,19 +22,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Esse middleware serve para adicionar os dados do login de forma que esteja acessivel em todos os arquivo EJS
+app.use(function adicionaUserNoRender(req, res, next) {
 
-app.use(function(req, res, next) {
-  console.log('rodando middleware 1')
-  next()
-})
-
-app.use(function (req, res, next) {
-  console.log('rodando middleware 2')
+  // De acordo com a documentação do express, o objeto res.locals pode ser usado para adicionar dados globais usados em todos os arquivos EJS
+  // http://expressjs.com/en/api.html#res.locals
+  res.locals.estaLogado = req.session.estaLogado
+  res.locals.nomeUsuario = req.session.nomeUsuario
   next()
 })
 
 app.use('/', require('./routes/index'));
-app.use('/pets', require('./routes/pets'))
 app.use('/servicos', require('./routes/servicos'))
 app.use('/admin', require('./routes/admin'))
 

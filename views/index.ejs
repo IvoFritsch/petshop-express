@@ -22,21 +22,14 @@
             <div class="container">
                 <h2>serviços</h2>
                 <div class="items">
+                  <% servicos.forEach(function(servico) { %>
                     <article>
-                        <div class="thumb"></div>
-                        <h3>banho completo</h3>
-                        <h4>R$40,00</h4>
+                      <div class="thumb"><img src="/uploads/<%= servico.imagem %>" style="width: 100%; height: 100%"></div>
+                      <h3><%= servico.nome %></h3>
+                      <h4>R$ <%= servico.valor %></h4>
                     </article>
-                    <article>
-                        <div class="thumb"></div>
-                        <h3>banho completo</h3>
-                        <h4>R$40,00</h4>
-                    </article>
-                    <article>
-                        <div class="thumb"></div>
-                        <h3>banho completo</h3>
-                        <h4>R$40,00</h4>
-                    </article>
+    
+                    <% }) %>
                 </div>
             </div>
         </section>

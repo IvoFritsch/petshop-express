@@ -1,10 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var ModelUsuarios = require('../models/usuarios')
+const express = require('express');
+const router = express.Router();
+const ModelUsuarios = require('../models/usuarios')
+const ModelServicos = require('../models/servicos')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  const obj = { 
+    servicos: ModelServicos.listaServicos()
+  }
+  res.render('index', obj);
 });
 
 const middlewareSobre = function(req, res, next) {
@@ -27,6 +31,11 @@ router.get('/contato', function(req, res, next) {
 
 router.get('/login', function(req, res, next) {
   res.render('login')
+})
+
+router.get('/logout', function(req, res, next) {
+  req.session.destroy()
+  res.redirect('/')
 })
 
 router.post('/login', function(req, res, next) {
