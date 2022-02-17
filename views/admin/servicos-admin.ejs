@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETSHOP DH</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <%- include("../partials/header") %>
+    <main>
+        <section class="contato">
+            <div class="container">
+                <h1>Listagem de serviços</h1>
+                <div class="align-row" style="width: 100%;">
+                  <table>
+                    <tr>
+                      <th>ID</th>
+                      <th>Nome</th>
+                      <th>Descricao</th>
+                      <th>Valor</th>
+                      <th>Ações</th>
+                    </tr>
+                    <% servicos.forEach(function(servico) { %>
+                    <tr>
+                      <td><%= servico.id %></td>
+                      <td><%= servico.nome %></td>
+                      <td><%= servico.descricao %></td>
+                      <td><%= servico.valor %></td>
+                      <td>
+                        <a href="/admin/servicos/<%= servico.id %>/editar">Editar</a>
+                        <a href="/admin/servicos/<%= servico.id %>/remover">Remover</a>
+                      </td>
+                    </tr>
+                    <% }) %>
+                  </table>
+                </div>
+                <a href="/admin/servicos/criar">Novo serviço</a>
+            </div>
+        </section>
+    </main>
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

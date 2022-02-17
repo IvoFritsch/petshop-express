@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETSHOP DH</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <%- include("./partials/header") %>
+    <main>
+        <section class="servicos-lista">
+            <div class="container">
+                <h1>Serviços</h1>
+                
+                <% servicos.forEach(function(servico) { %>
+
+                <article>
+                    <div class="thumb">
+                      <img src="/uploads/<%= servico.imagem %>" style="width: 100%; height: 100%">
+                    </div>
+                    <div class="info">
+                        <h2><%= servico.nome %></h2>
+                        <p>R$ <%= servico.valor %></p>
+                        <p><%= servico.descricao %></p>
+                        <a href="#" class="btn btn-primary">agendar</a>
+                    </div>
+                </article>
+
+                <% }) %>
+
+            </div>
+        </section>
+    </main>
+    <%- include("./partials/footer") %>
+</body>
+
+</html>
