@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const ModelUsuarios = require('../models/usuarios')
-const ModelServicos = require('../models/servicos')
+const { Usuario, Servico } = require('../models')
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   const obj = { 
-    servicos: ModelServicos.listaServicos()
+    servicos: await Servico.findAll()
   }
   res.render('index', obj);
 });
