@@ -12,7 +12,26 @@
 <body>
     <%- include("./partials/header") %>
     <main>
-        <!-- aqui vem o cadastro -->
+      <section class="contato">
+          <div class="container">
+              <h1>Login</h1>
+
+              <div class="align-row">
+                  <form method="POST" >
+                      <label for="email">Email</label>
+                      <input type="email" id="email" name="email" >
+
+                      <label for="senha">Senha</label>
+                      <input type="password" id="senha" name="senha" >
+
+                      <label for="senha">Repita a senha</label>
+                      <input type="password" id="repeatPassword" name="repeatPassword" >
+                      <hr/>
+                      <button type="submit" class="btn btn-primary">cadastrar</button>
+                  </form>
+              </div>
+          </div>
+      </section>
     </main>
     <%- include("./partials/footer") %>
 </body>
