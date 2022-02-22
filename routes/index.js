@@ -41,7 +41,7 @@ router.post('/login', function(req, res, next) {
   const usuarioLogin = ModelUsuarios.buscaUsuarioViaEmail(req.body.email)
   if(usuarioLogin.senha == req.body.senha) {
     req.session.estaLogado = true
-    req.session.nomeUsuario = usuarioLogin.nome
+    req.session.usuarioLogado = usuarioLogin
     res.redirect('/admin')
   } else {
     res.render('erro-validacao', { mensagemErro: 'Senha inválida' })

@@ -69,6 +69,11 @@ router.post('/servicos/criar', upload.single('imagemServico'), validaCadastroSer
 })
 
 
+router.get('/meus-dados', function(req, res) {
+  res.render('admin/meus-dados')
+
+})
+
 router.get('/servicos/:idServico/remover', function(req, res) {
   console.log('removendo servico')
 

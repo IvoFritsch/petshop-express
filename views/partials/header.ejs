@@ -7,7 +7,7 @@
           <li><a href="/servicos">Nossos serviços</a></li>
           <li><a href="/contato">Contato</a></li>
           <% if(estaLogado) { %>
-            <li><a href="/logout"><%= nomeUsuario %> (Fazer logout)</a></li>
+            <li><a href="/logout"><%= usuarioLogado.nome %> (Fazer logout)</a></li>
             <% } else { %>
             <li><a href="/login">Login</a></li>
           <% } %>

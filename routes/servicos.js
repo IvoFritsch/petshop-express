@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const ModelServicos = require('../models/servicos')
+const {Servico} = require('../models')
 
 router.get('/', function (req, res) {
   const obj = { 

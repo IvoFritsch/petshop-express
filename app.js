@@ -28,7 +28,7 @@ app.use(function adicionaUserNoRender(req, res, next) {
   // De acordo com a documentação do express, o objeto res.locals pode ser usado para adicionar dados globais usados em todos os arquivos EJS
   // http://expressjs.com/en/api.html#res.locals
   res.locals.estaLogado = req.session.estaLogado
-  res.locals.nomeUsuario = req.session.nomeUsuario
+  res.locals.usuarioLogado = req.session.usuarioLogado
   next()
 })
 
