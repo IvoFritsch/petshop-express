@@ -3,7 +3,7 @@ const multer = require('multer')
 
 const router = express.Router()
 
-const ModelServicos = require('../models/servicos')
+const { Servico } = require('../models')
 
 const upload = multer({
   dest: 'public/uploads/'
@@ -23,9 +23,9 @@ router.get('/', function(req, res) {
   res.render('admin/dashboard-admin')
 })
 
-router.get('/servicos', function(req, res) {
+router.get('/servicos', async function(req, res) {
   const obj = {
-    servicos: ModelServicos.listaServicos()
+    servicos: await Servico.findAll()
   }
   res.render('admin/servicos-admin', obj)
 })
@@ -60,10 +60,10 @@ function validaCadastroServico(req, res, next) {
   next()
 }
 
-router.post('/servicos/criar', upload.single('imagemServico'), validaCadastroServico, function(req, res) {
+router.post('/servicos/criar', upload.single('imagemServico'), validaCadastroServico, async function(req, res) {
   req.body.imagem = req.file.filename
 
-  ModelServicos.adicionaServico(req.body)
+  await Servico.create(req.body)
 
   res.redirect('/admin/servicos')
 })
@@ -74,21 +74,28 @@ router.get('/meus-dados', function(req, res) {
 
 })
 
-router.get('/servicos/:idServico/remover', function(req, res) {
+router.get('/servicos/:idServico/remover', async function(req, res) {
   console.log('removendo servico')
 
   const idServico = req.params.idServico
-
-  ModelServicos.removeServicoViaId(idServico)
-
+  await Servico.destroy({
+    where: {
+      id: idServico
+    }
+  })
 
   res.redirect('/admin/servicos')
 })
 
-router.get('/servicos/:idServico/editar', function(req, res) {
+router.get('/servicos/:idServico/editar', async function(req, res) {
   const idServico = req.params.idServico
+  const servico = await Servico.findByPk(idServico)
 
-  const servico = ModelServicos.buscaServicoViaId(idServico)
+  if(!servico) {
+    res.render('erro-validacao', { mensagemErro: 'Serviço não existe' })
+    return
+  }
+
   const obj = {
     servico: servico
   }
@@ -96,10 +103,15 @@ router.get('/servicos/:idServico/editar', function(req, res) {
   res.render('admin/editar-servico', obj)
 })
 
-router.post('/servicos/:idServico/editar', function(req, res) {
+router.post('/servicos/:idServico/editar', async function(req, res) {
 
   const idServico = req.params.idServico
-  ModelServicos.alteraServicoViaId(idServico, req.body)
+
+  await Servico.update(req.body, {
+    where: {
+      id: idServico
+    }
+  })
 
   res.redirect('/admin/servicos')
 })

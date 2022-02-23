@@ -37,9 +37,13 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/')
 })
 
-router.post('/login', function(req, res, next) {
-  const usuarioLogin = ModelUsuarios.buscaUsuarioViaEmail(req.body.email)
-  if(usuarioLogin.senha == req.body.senha) {
+router.post('/login', async function(req, res, next) {
+  const usuarioLogin = await Usuario.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+  if(usuarioLogin && usuarioLogin.senha == req.body.senha) {
     req.session.estaLogado = true
     req.session.usuarioLogado = usuarioLogin
     res.redirect('/admin')
