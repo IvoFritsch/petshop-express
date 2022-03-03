@@ -38,6 +38,10 @@ router.get('/categorias/:idCategoria', async function(req, res) {
   res.render('admin/visualizar-categoria')
 })
 
+router.get('/meus-favoritos/', async function(req, res) {
+  res.render('admin/favoritos')
+})
+
 router.get('/produtos/criar', function(req, res) {
   res.render('admin/criar-produto')
 })
