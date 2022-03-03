@@ -14,20 +14,23 @@
     <main>
         <section class="contato">
             <div class="container">
-                <h1>Editar serviço</h1>
+                <h1>Cadastro de produto</h1>
 
                 <div class="align-row">
-                    <form method="POST" >
+                    <form method="POST" enctype="multipart/form-data">
+                        <label for="imagemProduto">Envie uma imagem</label>
+                        <input type="file" name="imagemProduto">
+
                         <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome" value="<%= servico.nome %>" required>
+                        <input type="text" id="nome" name="nome" >
 
                         <label for="descricao">Descricao</label>
-                        <textarea name="descricao" id="descricao" required><%= servico.descricao %></textarea>
+                        <textarea name="descricao" id="descricao" ></textarea>
 
                         <label for="valor">Valor</label>
-                        <input type="number" id="valor" name="valor" value="<%= servico.valor %>" required>
+                        <input type="number" id="valor" name="valor" >
                         <hr/>
-                        <button type="submit" class="btn btn-primary">salvar</button>
+                        <button type="submit" class="btn btn-primary">enviar</button>
                     </form>
                 </div>
             </div>

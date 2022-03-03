@@ -3,7 +3,7 @@ const multer = require('multer')
 
 const router = express.Router()
 
-const { Servico } = require('../models')
+const { Produto } = require('../models')
 
 const upload = multer({
   dest: 'public/uploads/'
@@ -23,24 +23,24 @@ router.get('/', function(req, res) {
   res.render('admin/dashboard-admin')
 })
 
-router.get('/servicos', async function(req, res) {
+router.get('/produtos', async function(req, res) {
   const obj = {
-    servicos: await Servico.findAll()
+    produtos: await Produto.findAll()
   }
-  res.render('admin/servicos-admin', obj)
+  res.render('admin/produtos-admin', obj)
 })
 
-router.get('/servicos/criar', function(req, res) {
-  res.render('admin/criar-servico')
+router.get('/produtos/criar', function(req, res) {
+  res.render('admin/criar-produto')
 })
 
 /*
-O nome do serviço tem mais de 3 caracteres;
+O nome do produto tem mais de 3 caracteres;
 Os campos Nome, Descrição e Preço foram preenchidos;
 O campo Descrição tem mais de 10 caracteres.
 O campo preço é do tipo numérico.
 */
-function validaCadastroServico(req, res, next) {
+function validaCadastroProduto(req, res, next) {
   if(!req.body.nome || !req.body.descricao || !req.body.valor) {
     res.render('erro-validacao', { mensagemErro: 'Preencha todos os campos' })
     return
@@ -60,12 +60,12 @@ function validaCadastroServico(req, res, next) {
   next()
 }
 
-router.post('/servicos/criar', upload.single('imagemServico'), validaCadastroServico, async function(req, res) {
+router.post('/produtos/criar', upload.single('imagemProduto'), validaCadastroProduto, async function(req, res) {
   req.body.imagem = req.file.filename
 
-  await Servico.create(req.body)
+  await Produto.create(req.body)
 
-  res.redirect('/admin/servicos')
+  res.redirect('/admin/produtos')
 })
 
 
@@ -74,46 +74,46 @@ router.get('/meus-dados', function(req, res) {
 
 })
 
-router.get('/servicos/:idServico/remover', async function(req, res) {
-  console.log('removendo servico')
+router.get('/produtos/:idProduto/remover', async function(req, res) {
+  console.log('removendo produto')
 
-  const idServico = req.params.idServico
-  await Servico.destroy({
+  const idProduto = req.params.idProduto
+  await Produto.destroy({
     where: {
-      id: idServico
+      id: idProduto
     }
   })
 
-  res.redirect('/admin/servicos')
+  res.redirect('/admin/produtos')
 })
 
-router.get('/servicos/:idServico/editar', async function(req, res) {
-  const idServico = req.params.idServico
-  const servico = await Servico.findByPk(idServico)
+router.get('/produtos/:idProduto/editar', async function(req, res) {
+  const idProduto = req.params.idProduto
+  const produto = await Produto.findByPk(idProduto)
 
-  if(!servico) {
-    res.render('erro-validacao', { mensagemErro: 'Serviço não existe' })
+  if(!produto) {
+    res.render('erro-validacao', { mensagemErro: 'Produto não existe' })
     return
   }
 
   const obj = {
-    servico: servico
+    produto: produto
   }
 
-  res.render('admin/editar-servico', obj)
+  res.render('admin/editar-produto', obj)
 })
 
-router.post('/servicos/:idServico/editar', async function(req, res) {
+router.post('/produtos/:idProduto/editar', async function(req, res) {
 
-  const idServico = req.params.idServico
+  const idProduto = req.params.idProduto
 
-  await Servico.update(req.body, {
+  await Produto.update(req.body, {
     where: {
-      id: idServico
+      id: idProduto
     }
   })
 
-  res.redirect('/admin/servicos')
+  res.redirect('/admin/produtos')
 })
 
 module.exports = router

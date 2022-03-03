@@ -14,7 +14,7 @@
     <main>
         <section class="contato">
             <div class="container">
-                <h1>Listagem de serviços</h1>
+                <h1>Listagem de produtos</h1>
                 <div class="align-row" style="width: 100%;">
                   <table>
                     <tr>
@@ -24,21 +24,21 @@
                       <th>Valor</th>
                       <th>Ações</th>
                     </tr>
-                    <% servicos.forEach(function(servico) { %>
+                    <% produtos.forEach(function(produto) { %>
                     <tr>
-                      <td><%= servico.id %></td>
-                      <td><%= servico.nome %></td>
-                      <td><%= servico.descricao %></td>
-                      <td><%= servico.valor %></td>
+                      <td><%= produto.id %></td>
+                      <td><%= produto.nome %></td>
+                      <td><%= produto.descricao %></td>
+                      <td><%= produto.valor %></td>
                       <td>
-                        <a href="/admin/servicos/<%= servico.id %>/editar">Editar</a>
-                        <a href="/admin/servicos/<%= servico.id %>/remover">Remover</a>
+                        <a href="/admin/produtos/<%= produto.id %>/editar">Editar</a>
+                        <a href="/admin/produtos/<%= produto.id %>/remover">Remover</a>
                       </td>
                     </tr>
                     <% }) %>
                   </table>
                 </div>
-                <a href="/admin/servicos/criar">Novo serviço</a>
+                <a href="/admin/produtos/criar">Novo produto</a>
             </div>
         </section>
     </main>

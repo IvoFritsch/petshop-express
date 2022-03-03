@@ -18,15 +18,15 @@
                 <img src="img/ilustra-park.png" alt="ilustração de pessoa passeando com o cachorro na praça">
             </div>
         </section>
-        <section class="servicos">
+        <section class="produtos">
             <div class="container">
-                <h2>serviços</h2>
+                <h2>produtos</h2>
                 <div class="items">
-                  <% servicos.forEach(function(servico) { %>
+                  <% produtos.forEach(function(produto) { %>
                     <article>
-                      <div class="thumb"><img src="/uploads/<%= servico.imagem %>" style="width: 100%; height: 100%"></div>
-                      <h3><%= servico.nome %></h3>
-                      <h4>R$ <%= servico.valor %></h4>
+                      <div class="thumb"><img src="/uploads/<%= produto.imagem %>" style="width: 100%; height: 100%"></div>
+                      <h3><%= produto.nome %></h3>
+                      <h4>R$ <%= produto.valor %></h4>
                     </article>
     
                     <% }) %>

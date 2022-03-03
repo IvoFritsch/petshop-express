@@ -33,7 +33,7 @@ app.use(function adicionaUserNoRender(req, res, next) {
 })
 
 app.use('/', require('./routes/index'));
-app.use('/servicos', require('./routes/servicos'))
+app.use('/produtos', require('./routes/produtos'))
 app.use('/admin', require('./routes/admin'))
 
 // catch 404 and forward to error handler
