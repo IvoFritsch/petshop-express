@@ -27,7 +27,7 @@ router.get('/produtos', async function(req, res) {
   const obj = {
     produtos: await Produto.findAll()
   }
-  res.render('admin/produtos-admin', obj)
+  res.render('admin/produtos', obj)
 })
 
 router.get('/produtos/criar', function(req, res) {
