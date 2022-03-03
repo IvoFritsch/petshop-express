@@ -30,6 +30,14 @@ router.get('/produtos', async function(req, res) {
   res.render('admin/produtos', obj)
 })
 
+router.get('/categorias', async function(req, res) {
+  res.render('admin/categorias')
+})
+
+router.get('/categorias/:idCategoria', async function(req, res) {
+  res.render('admin/visualizar-categoria')
+})
+
 router.get('/produtos/criar', function(req, res) {
   res.render('admin/criar-produto')
 })
