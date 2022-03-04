@@ -14,5 +14,14 @@ module.exports = (connection, DataTypes) => {
     tableName: 'categorias'
   })
 
+  model.associate = models => {
+    model.hasMany(models.Produto, {
+      foreignKey: 'categoria_id',
+      as: 'produtos'
+    })
+
+    model.sync({ alter: true })
+  }
+
   return model
 }

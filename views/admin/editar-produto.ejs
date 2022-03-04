@@ -18,10 +18,10 @@
 
                 <div class="align-row">
                     <form method="POST" >
-                        
-                        <label for="categoria">Categoria</label>
-                        <input type="text" id="categoria" name="categoria" value="Rações" required disabled>
-
+                        <% if(produto.categoria) { %>
+                          <label for="categoria">Categoria</label>
+                          <input type="text" id="categoria" name="categoria" value="<%= produto.categoria.nome %>" required disabled>
+                        <% } %>
                         <label for="nome">Nome</label>
                         <input type="text" id="nome" name="nome" value="<%= produto.nome %>" required>
 

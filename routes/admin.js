@@ -3,7 +3,7 @@ const multer = require('multer')
 
 const router = express.Router()
 
-const { Produto } = require('../models')
+const { Produto, Categoria } = require('../models')
 
 const upload = multer({
   dest: 'public/uploads/'
@@ -31,11 +31,25 @@ router.get('/produtos', async function(req, res) {
 })
 
 router.get('/categorias', async function(req, res) {
-  res.render('admin/categorias')
+
+  const obj = {
+    categorias: await Categoria.findAll()
+  }
+  res.render('admin/categorias', obj)
 })
 
 router.get('/categorias/:idCategoria', async function(req, res) {
-  res.render('admin/visualizar-categoria')
+  const idCategoria = req.params.idCategoria
+  const obj = {
+    categoria: await Categoria.findByPk(idCategoria, {
+      include: {
+        model: Produto,
+        as: 'produtos'
+      }
+    })
+  }
+
+  res.render('admin/visualizar-categoria', obj)
 })
 
 router.get('/meus-favoritos/', async function(req, res) {
@@ -101,7 +115,12 @@ router.get('/produtos/:idProduto/remover', async function(req, res) {
 
 router.get('/produtos/:idProduto/editar', async function(req, res) {
   const idProduto = req.params.idProduto
-  const produto = await Produto.findByPk(idProduto)
+  const produto = await Produto.findByPk(idProduto, {
+    include: {
+      model: Categoria,
+      as: 'categoria'
+    }
+  })
 
   if(!produto) {
     res.render('erro-validacao', { mensagemErro: 'Produto não existe' })

@@ -22,6 +22,15 @@ module.exports = (connection, DataTypes) => {
     timestamps: true,
     tableName: 'produtos'
   })
-  model.sync({ alter: true })
+
+  model.associate = models => {
+    model.belongsTo(models.Categoria, {
+      foreignKey: 'categoria_id',
+      as: 'categoria'
+    })
+    
+    model.sync({ alter: true })
+  }
+
   return model
 }

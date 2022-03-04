@@ -22,14 +22,15 @@
                       <th>Nome</th>
                       <th>Ações</th>
                     </tr>
-                    
-                    <tr>
-                      <td>1</td>
-                      <td>Rações</td>
-                      <td>
-                        <a href="/admin/categorias/1">Ver</a>
-                      </td>
-                    </tr>
+                    <% categorias.forEach(categoria => { %>
+                      <tr>
+                        <td><%= categoria.id %></td>
+                        <td><%= categoria.nome %></td>
+                        <td>
+                          <a href="/admin/categorias/<%= categoria.id %>">Ver</a>
+                        </td>
+                      </tr>
+                    <% }) %>
                   </table>
                 </div>
                 <a href="/admin/categorias/criar">Nova categoria</a>
