@@ -38,6 +38,10 @@ router.get('/categorias', async function(req, res) {
   res.render('admin/categorias', obj)
 })
 
+router.get('/categorias/criar', function(req, res) {
+  res.render('admin/criar-categoria')
+})
+
 router.get('/categorias/:idCategoria', async function(req, res) {
   const idCategoria = req.params.idCategoria
   const obj = {
@@ -94,6 +98,18 @@ router.post('/produtos/criar', upload.single('imagemProduto'), validaCadastroPro
   res.redirect('/admin/produtos')
 })
 
+router.post('/categorias/criar', async function(req, res) {
+  if(req.body.nome.length <= 3) {
+    res.render('erro-validacao', { mensagemErro: 'O tamanho do nome deve ser maior do que 3 caracteres' })
+    return
+  }
+
+  console.log(req.body)
+  await Categoria.create(req.body)
+
+  res.redirect('/admin/categorias')
+})
+
 
 router.get('/meus-dados', function(req, res) {
   res.render('admin/meus-dados')
@@ -101,7 +117,6 @@ router.get('/meus-dados', function(req, res) {
 })
 
 router.get('/produtos/:idProduto/remover', async function(req, res) {
-  console.log('removendo produto')
 
   const idProduto = req.params.idProduto
   await Produto.destroy({
