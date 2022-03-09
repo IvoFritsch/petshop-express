@@ -24,16 +24,17 @@
                       <th>Valor</th>
                       <th>Ações</th>
                     </tr>
-                    
-                    <tr>
-                      <td>1</td>
-                      <td>Ração 1</td>
-                      <td>Uma ração</td>
-                      <td>45</td>
-                      <td>
-                        <a href="/admin/produtos/1/editar">Editar</a>
-                      </td>
-                    </tr>
+                    <% favoritos.forEach(produto => { %>
+                      <tr>
+                        <td><%= produto.id %></td>
+                        <td><%= produto.nome %></td>
+                        <td><%= produto.descricao %></td>
+                        <td><%= produto.valor %></td>
+                        <td>
+                          <a href="/admin/produtos/<%= produto.id %>/editar">Editar</a>
+                        </td>
+                      </tr>
+                    <% }) %>
                   </table>
                 </div>
             </div>

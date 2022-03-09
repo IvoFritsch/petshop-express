@@ -19,6 +19,17 @@ module.exports = (connection, DataTypes) => {
     timestamps: true,
     tableName: 'usuarios'
   })
-  model.sync({ alter: true })
+
+  model.associate = models => {
+
+    model.belongsToMany(models.Produto, {
+      through: models.ProdutoFavoritoUsuario,
+      foreignKey: 'usuario_id',
+      as: 'favoritos'
+    })
+
+    model.sync({ alter: true })
+  }
+
   return model
 }

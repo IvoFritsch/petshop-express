@@ -21,6 +21,13 @@
                         <label for="imagemProduto">Envie uma imagem</label>
                         <input type="file" name="imagemProduto">
 
+                        <label for="imagemProduto">Selecione uma categoria</label>
+                        <select name="categoria_id" id="categoria_id">
+                          <% categorias.forEach(categoria => {%>
+                            <option value="<%= categoria.id %>"><%= categoria.nome %></option>
+                          <% }) %>
+                        </select>
+
                         <label for="nome">Nome</label>
                         <input type="text" id="nome" name="nome" >
 

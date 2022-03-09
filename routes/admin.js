@@ -3,7 +3,7 @@ const multer = require('multer')
 
 const router = express.Router()
 
-const { Produto, Categoria } = require('../models')
+const { Produto, Categoria, Usuario } = require('../models')
 
 const upload = multer({
   dest: 'public/uploads/'
@@ -57,7 +57,17 @@ router.get('/categorias/:idCategoria', async function(req, res) {
 })
 
 router.get('/meus-favoritos/', async function(req, res) {
-  res.render('admin/favoritos')
+  
+  const usuario = await Usuario.findByPk(req.session.usuarioLogado.id, {
+    include: {
+      model: Produto,
+      as: 'favoritos'
+    }
+  })
+
+  res.render('admin/favoritos', {
+    favoritos: usuario.favoritos
+  })
 })
 
 router.get('/produtos/criar', function(req, res) {
