@@ -3,7 +3,7 @@ const multer = require('multer')
 
 const router = express.Router()
 
-const { Produto, Categoria, Usuario } = require('../models')
+const { Produto, Categoria, Usuario, ProdutoFavoritoUsuario } = require('../models')
 
 const upload = multer({
   dest: 'public/uploads/'
@@ -70,8 +70,13 @@ router.get('/meus-favoritos/', async function(req, res) {
   })
 })
 
-router.get('/produtos/criar', function(req, res) {
-  res.render('admin/criar-produto')
+router.get('/produtos/criar', async function(req, res) {
+
+  const categorias = await Categoria.findAll()
+
+  res.render('admin/criar-produto', {
+    categorias: categorias
+  })
 })
 
 /*
@@ -136,6 +141,19 @@ router.get('/produtos/:idProduto/remover', async function(req, res) {
   })
 
   res.redirect('/admin/produtos')
+})
+
+router.get('/produtos/:idProduto/favoritar', async function(req, res) {
+  const idProduto = req.params.idProduto
+  const idUsuario = req.session.usuarioLogado.id
+
+  await ProdutoFavoritoUsuario.create({
+    produto_id: idProduto,
+    usuario_id: idUsuario
+  })
+  
+  res.redirect('/admin/meus-favoritos')
+
 })
 
 router.get('/produtos/:idProduto/editar', async function(req, res) {
