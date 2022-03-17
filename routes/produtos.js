@@ -9,11 +9,4 @@ router.get('/', async function (req, res) {
   res.render('produtos', obj)
 })
 
-router.get('/:idProduto', async function (req, res) {
-  const { idProduto } = req.params
-
-  const produto = await Produto.findByPk(idProduto)
-  res.send(produto)
-})
-
 module.exports = router

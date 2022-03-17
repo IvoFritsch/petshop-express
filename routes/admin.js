@@ -70,6 +70,16 @@ router.get('/meus-favoritos/', async function(req, res) {
   })
 })
 
+router.get('/consultar-cep', async function(req, res) {
+
+  res.render('admin/consultar-cep')
+})
+
+router.post('/consultar-cep', async function(req, res) {
+  
+  res.render('admin/dados-cep')
+})
+
 router.get('/produtos/criar', async function(req, res) {
 
   const categorias = await Categoria.findAll()

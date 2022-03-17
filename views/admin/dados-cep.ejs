@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETSHOP DH</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <%- include("../partials/header") %>
+    <main>
+        <section class="contato">
+            <div class="container">
+                <h1>Dados do CEP XXXXXXXXXX</h1>
+                <form method="POST">
+                  <label for="rua">Rua</label>
+                  <input type="text" name="rua" value="" disabled>
+
+                  <label for="bairro">Bairro</label>
+                  <input type="text" name="bairro" value="" disabled>
+
+                  <label for="cidade">Cidade</label>
+                  <input type="text" name="cidade" value="" disabled>
+
+                  <label for="uf">UF</label>
+                  <input type="text" name="uf" value="" disabled>
+                </form>
+            </div>
+        </section>
+    </main>
+    <%- include("../partials/footer") %>
+</body>
+
+</html>

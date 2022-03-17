@@ -35,6 +35,7 @@ app.use(function adicionaUserNoRender(req, res, next) {
 app.use('/', require('./routes/index'));
 app.use('/produtos', require('./routes/produtos'))
 app.use('/admin', require('./routes/admin'))
+app.use('/api', require('./routes/api'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

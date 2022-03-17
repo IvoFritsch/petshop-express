@@ -14,10 +14,13 @@
     <main>
         <section class="contato">
             <div class="container">
-                <h1>Painel do admin</h1>
-                <a href="/admin/produtos">Lista de produtos</a>
-                <a href="/admin/categorias">Categorias dos produtos</a>
-                <a href="/admin/consultar-cep">Consultar CEP</a>
+                <h1>Consultar CEP</h1>
+                <form method="POST">
+                  <label for="cep">Digite um CEP:</label>
+                  <input type="text" name="cep" required>
+                  <hr/>
+                  <button type="submit" class="btn btn-primary">consultar</button>
+                </form>
             </div>
         </section>
     </main>
