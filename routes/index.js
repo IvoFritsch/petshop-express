@@ -38,17 +38,21 @@ router.get('/logout', function(req, res, next) {
 })
 
 router.post('/login', async function(req, res, next) {
-  const usuarioLogin = await Usuario.findOne({
-    where: {
-      email: req.body.email
+  try {
+    const usuarioLogin = await Usuario.findOne({
+      where: {
+        email: req.body.email
+      }
+    })
+    if(usuarioLogin && usuarioLogin.senha == req.body.senha) {
+      req.session.estaLogado = true
+      req.session.usuarioLogado = usuarioLogin
+      res.redirect('/admin')
+    } else {
+      res.render('erro-validacao', { mensagemErro: 'Senha inválida' })
     }
-  })
-  if(usuarioLogin && usuarioLogin.senha == req.body.senha) {
-    req.session.estaLogado = true
-    req.session.usuarioLogado = usuarioLogin
-    res.redirect('/admin')
-  } else {
-    res.render('erro-validacao', { mensagemErro: 'Senha inválida' })
+  } catch (erro) {
+    next(erro)
   }
 })
 

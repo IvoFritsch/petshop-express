@@ -14,19 +14,19 @@
     <main>
         <section class="contato">
             <div class="container">
-                <h1>Dados do CEP XXXXXXXXXX</h1>
+                <h1>Dados do CEP <%= cep %></h1>
                 <form method="POST">
                   <label for="rua">Rua</label>
-                  <input type="text" name="rua" value="" disabled>
+                  <input type="text" name="rua" value="<%= logradouro %>" disabled>
 
                   <label for="bairro">Bairro</label>
-                  <input type="text" name="bairro" value="" disabled>
+                  <input type="text" name="bairro" value="<%= bairro %>" disabled>
 
                   <label for="cidade">Cidade</label>
-                  <input type="text" name="cidade" value="" disabled>
+                  <input type="text" name="cidade" value="<%= localidade %>" disabled>
 
                   <label for="uf">UF</label>
-                  <input type="text" name="uf" value="" disabled>
+                  <input type="text" name="uf" value="<%= uf %>" disabled>
                 </form>
             </div>
         </section>

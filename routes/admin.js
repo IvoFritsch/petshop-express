@@ -3,6 +3,8 @@ const multer = require('multer')
 
 const router = express.Router()
 
+const axios = require('axios').default
+
 const { Produto, Categoria, Usuario, ProdutoFavoritoUsuario } = require('../models')
 
 const upload = multer({
@@ -71,13 +73,15 @@ router.get('/meus-favoritos/', async function(req, res) {
 })
 
 router.get('/consultar-cep', async function(req, res) {
-
   res.render('admin/consultar-cep')
 })
 
 router.post('/consultar-cep', async function(req, res) {
   
-  res.render('admin/dados-cep')
+  const response = await axios.get(`https://viacep.com.br/ws/${req.body.cep}/json`)
+  console.log(response.data)
+
+  res.render('admin/dados-cep', response.data)
 })
 
 router.get('/produtos/criar', async function(req, res) {
