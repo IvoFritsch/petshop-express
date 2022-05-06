@@ -24,6 +24,33 @@ router.get('/cadastro', function(req, res, next) {
   res.render('cadastro')
 })
 
+router.post('/cadastro', async function(req, res, next) {
+  if(req.body.nome.length <= 3) {
+    res.render('erro-validacao', { mensagemErro: 'O tamanho do nome deve ser maior do que 3 caracteres' })
+    return
+  }
+  if(req.body.senha !== req.body.repeatPassword) {
+    res.render('erro-validacao', { mensagemErro: 'As duas senhas não são iguais' })
+    return
+  }
+  if(req.body.senha.length <= 6) {
+    res.render('erro-validacao', { mensagemErro: 'O tamanho da deve ser maior do que 6 caracteres' })
+    return
+  }
+  const usuario = await Usuario.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+  if(usuario) {
+    res.render('erro-validacao', { mensagemErro: 'Já existe um usuário com esse email' })
+    return
+  }
+  await Usuario.create(req.body)
+
+  res.redirect('/login')
+})
+
 router.get('/contato', function(req, res, next) {
   res.render('contato')
 })
